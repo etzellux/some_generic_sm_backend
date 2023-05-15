@@ -1,0 +1,28 @@
+services:
+  app:
+    container_name: some_generic_sm
+    image: some_generic_sm
+    build:
+      context: .
+      dockerfile: python.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ".:/some_generic_sm"
+    environment:
+      - DJANGO_SETTINGS_MODULE=some_generic_sm.settings.base
+    tty: true
+    restart: unless-stopped
+
+  postgresql:
+    container_name: postgresql
+    image: postgres:15
+    environment:
+      POSTGRES_USER: some_generic_sm_dbu
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: some_generic_sm
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: unless-stopped
