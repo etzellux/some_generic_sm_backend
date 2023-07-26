@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-CONTAINER_NAME="some_generic_sm"
+CONTAINER_NAME="some_generic_sm_app"
 DOCKER_FILE="docker-compose.yml"
 
 docker-compose stop

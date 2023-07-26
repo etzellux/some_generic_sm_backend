@@ -1,6 +1,6 @@
 services:
   some_generic_sm_app:
-    container_name: some_generic_sm
+    container_name: some_generic_sm_app
     image: some_generic_sm
     build:
       context: .
@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   postgresql:
-    container_name: postgresql
+    container_name: some_generic_sm_postgresql
     image: postgres:15
     environment:
       POSTGRES_USER: some_generic_sm_dbu
@@ -26,3 +26,11 @@ services:
     ports:
       - 5432:5432
     restart: unless-stopped
+  
+  redis:
+    container_name: some_generic_sm_redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data

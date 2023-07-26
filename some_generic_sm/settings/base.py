@@ -59,7 +59,7 @@ ROOT_URLCONF = 'some_generic_sm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['some_generic_sm/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

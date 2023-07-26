@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold">{{ post.title }}</h1>
+  <p class="text-lg mt-2">{{ post.content }}</p>
+  <p class="mt-4">Created at: {{ post.created_at }}</p>
+  <p>Updated at: {{ post.updated_at }}</p>
+  <div class="mt-4">
+    <a href="{% url 'post_update' post.id %}" hx-get="{% url 'post_update' post.id %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+      Edit
+    </a>
+    <a href="{% url 'post_delete' post.id %}" hx-delete="{% url 'post_delete' post.id %}" hx-confirm="Are you sure you want to delete '{{ post.title }}'?" class="inline-block bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded ml-2">
+      Delete
+    </a>
+    <a href="{% url 'post_list' %}" hx-get="{% url 'post_list' %}" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded ml-2">
+      Back to List
+    </a>
+  </div>
+{% endblock %}

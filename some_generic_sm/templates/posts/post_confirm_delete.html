@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold">Confirm Delete</h1>
+  <p class="mt-4">Are you sure you want to delete "{{ post.title }}"?</p>
+  <form method="post" hx-post="{% url 'post_delete' post.id %}">
+    {% csrf_token %}
+    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Yes, Delete</button>
+  </form>
+  <a href="{% url 'post_detail' post.id %}" hx-get="{% url 'post_detail' post.id %}" class="block mt-4 text-blue-500 hover:underline">No, Cancel</a>
+{% endblock %}

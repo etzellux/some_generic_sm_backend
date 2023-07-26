@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Post List{% endblock %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold mb-4">Post List</h1>
+  <ul class="list-disc pl-6">
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post_detail' post.id %}" hx-get="{% url 'post_detail' post.id %}" class="text-blue-500 hover:underline">
+          {{ post.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'post_create' %}" hx-get="{% url 'post_create' %}" class="block mt-4 text-blue-500 hover:underline">
+    Create New Post
+  </a>
+{% endblock %}
