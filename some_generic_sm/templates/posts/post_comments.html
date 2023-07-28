@@ -1,0 +1,17 @@
+<div id="comments" hx-get="{% url 'post_comments' post.id %}" hx-trigger="every 1s, submit from:#create_comment" hx-target="this" hx-swap="outerHTML">
+  <h1 class="block text-gray-700 text-lg font-semibold mt-4 mb-2">Comments</h1>
+  {% for comment in comments %}
+    <div class="mb-4 p-4 bg-white rounded-lg shadow-md">
+      <div class="flex justify-between mb-2">
+        <div class="text-gray-500 text-sm">
+          <p>{{ comment.user.username }}</p>
+          <p>{{ comment.created_at|date:"F d, Y" }}</p>
+        </div>
+        {% if comment.user == request.user %}
+          <button id="delete_comment" class="text-red-500 hover:text-red-700" hx-delete="{% url 'post_delete_comment' comment.id %}" hx-confirm="Are you sure you wish to delete your comment?">Delete</button>
+        {% endif %}
+      </div>
+      <p>{{ comment.content }}</p>
+    </div>
+  {% endfor %}
+</div>

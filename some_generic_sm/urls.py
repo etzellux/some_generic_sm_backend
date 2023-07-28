@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('some_generic_sm.posts.urls')),
+    path('', include('some_generic_sm.users.urls')),
+    path('', include('some_generic_sm.home.urls')),
 ]

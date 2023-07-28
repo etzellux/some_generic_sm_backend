@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'some_generic_sm.users',
     'some_generic_sm.posts',
+    'some_generic_sm.home',
 ]
 
 MIDDLEWARE = [

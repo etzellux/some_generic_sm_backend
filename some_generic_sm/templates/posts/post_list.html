@@ -1,19 +1,23 @@
+<!-- post_list.html -->
+
 {% extends 'base.html' %}
 
-{% block title %}Post List{% endblock %}
+{% block title %}Posts{% endblock %}
 
 {% block content %}
-  <h1 class="text-3xl font-bold mb-4">Post List</h1>
-  <ul class="list-disc pl-6">
+  <h1 class="text-3xl font-bold mb-4">Posts</h1>
+  <div class="grid grid-cols-4 gap-4">
     {% for post in posts %}
-      <li>
-        <a href="{% url 'post_detail' post.id %}" hx-get="{% url 'post_detail' post.id %}" class="text-blue-500 hover:underline">
+      <div class="bg-white p-4 shadow-md rounded-lg">
+        <a href="{% url 'post_detail' post.id %}" class="block text-blue-500 hover:underline" hx-get="{% url 'post_detail' post.id %}" hx-swap="innerHTML" hx-target="#content">
           {{ post.title }}
         </a>
-      </li>
+        <p class="text-gray-500">Author: {{ post.user.username }}</p>
+        <p class="text-gray-500">Created at: {{ post.created_at }}</p>
+      </div>
     {% endfor %}
-  </ul>
-  <a href="{% url 'post_create' %}" hx-get="{% url 'post_create' %}" class="block mt-4 text-blue-500 hover:underline">
+  </div>
+  <a href="{% url 'post_create' %}" hx-get="{% url 'post_create' %}" class="block mt-4 text-blue-500 hover:underline" hx-swap="innerHTML" hx-target="#content">
     Create New Post
   </a>
 {% endblock %}

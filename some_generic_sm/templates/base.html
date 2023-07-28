@@ -7,14 +7,15 @@
   <title>{% block title %}{% endblock %}</title>
   <!-- Add your CSS link here if necessary -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/htmx.org@1.9.4"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <!-- Navbar -->
   <nav class="bg-blue-600 py-4">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center">
-        <a href="/" class="text-white text-xl font-bold">My App</a>
+        <a href="/" class="text-white text-xl font-bold">Some Generic Social Media</a>
         <div class="space-x-4">
           <!-- Add your navigation links here -->
           <a href="{% url 'post_list' %}" class="text-white hover:text-gray-200">Posts</a>
@@ -22,9 +23,10 @@
           <a href="/" class="text-white hover:text-gray-200">Contact</a>
           <!-- Add a login/logout link based on user authentication status -->
           {% if user.is_authenticated %}
-          <a href="#" class="text-white hover:text-gray-200">Logout</a>
+          <a href="{% url 'user_signout' %}" class="text-white hover:text-gray-200">Sign Out</a>
           {% else %}
-          <a href="#" class="text-white hover:text-gray-200">Login</a>
+          <a href="{% url 'user_signup' %}" class="text-white hover:text-gray-200">Sign Up</a>
+          <a href="{% url 'user_signin' %}" class="text-white hover:text-gray-200">Sign In</a>
           {% endif %}
         </div>
       </div>
@@ -32,7 +34,7 @@
   </nav>
 
   <!-- Content -->
-  <div class="container mx-auto px-4 py-8">
+  <div id="content" class="container mx-auto px-4 py-8">
     {% block content %}{% endblock %}
   </div>
 
